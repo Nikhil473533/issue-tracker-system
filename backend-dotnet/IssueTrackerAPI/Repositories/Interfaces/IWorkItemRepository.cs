@@ -9,5 +9,6 @@ public interface IWorkItemRepository
     void Update(WorkItem workItem);
     void SoftDelete(int id);
     void Save();
+    String Restore(int id);
 
 }

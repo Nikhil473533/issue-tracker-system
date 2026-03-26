@@ -73,6 +73,11 @@ public class WorkItemService : IWorkItemService
         return "Work Item with Id: " + id + " has been deleted.";
     }
 
+    public String Restore(int id)
+    {
+        return _repository.Restore(id);
+    }
+
     private WorkItemResponse ToResponse(WorkItem workItem)
     {
         return new WorkItemResponse

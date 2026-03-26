@@ -49,10 +49,27 @@ public class WorkItemController : ControllerBase
         return Ok("WorkItem was updated successfully.");
     }
 
+    [HttpPatch("restore/{id}")]
+    public IActionResult Restore(int id)
+    {
+        String output = _service.Restore(id);
+
+        return Ok(new ApiResponse
+        {
+             Message = output,
+             Success = true
+        });
+    }
+
     [HttpDelete("{id}")]
-    public String SoftDelete(int id)
+    public IActionResult SoftDelete(int id)
     {
         String output = _service.SoftDelete(id);
-        return output;
+
+        return Ok(new ApiResponse
+        {
+            Message = output,
+            Success = true
+        });
     }
 }

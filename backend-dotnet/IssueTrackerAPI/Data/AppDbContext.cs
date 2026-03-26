@@ -10,6 +10,7 @@ public class AppDbContext : DbContext
     public DbSet<WorkItem> WorkItems { get; set; }
     public DbSet<Status> Statuses { get; set; }
     public DbSet<User> Users { get; set; }
+    public DbSet<AuditLog> AuditLogs { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -32,6 +33,14 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<User>().HasQueryFilter(u => !u.IsDeleted);
         modelBuilder.Entity<Status>().HasQueryFilter(s => !s.IsDeleted);
         modelBuilder.Entity<WorkItem>().HasQueryFilter(w => !w.IsDeleted);
+
+        modelBuilder.Entity<AuditLog>(entity =>
+        {
+            entity.Property(e => e.id).ValueGeneratedOnAdd();
+
+            entity.Property(e => e.event_time)
+                  .HasDefaultValueSql("GETUTCDATE()");
+        });
     }
 
 }

@@ -10,4 +10,5 @@ public interface IWorkItemService
     void Add(WorkItemRequest workItem);
     void Update(int id, WorkItemRequest workItem);
     String SoftDelete(int id);
+   String Restore(int id);
 }
